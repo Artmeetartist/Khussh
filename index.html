@@ -14,13 +14,13 @@
     <style>
         /* CSS VARIABLES - BRAND COLORS & TYPOGRAPHY */
         :root {
-            --bg-color: #FAF6F0; /* Warm ivory for readability */
-            --primary: #3B1318; /* Deep Maroon from Logo */
-            --secondary: #D5B871; /* Champagne Gold from Logo */
+            --bg-color: #FFFFFF; /* Pure White */
+            --primary: #6A1523; /* Rich Maroon */
+            --secondary: #F0A500; /* Premium Yellow */
             --text-dark: #2B2B2B;
             --text-light: #555555;
             --white: #FFFFFF;
-            --border-color: #EADAC3;
+            --border-color: #EAE3D9;
             
             --font-heading: 'Cinzel', serif;
             --font-body: 'Montserrat', sans-serif;
@@ -110,12 +110,15 @@
             background-color: var(--primary);
             color: var(--secondary);
             border: 1px solid var(--primary);
+            transition: var(--transition);
         }
 
         .btn-primary:hover {
             background-color: var(--secondary);
             color: var(--primary);
             border-color: var(--secondary);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(106, 21, 35, 0.2);
         }
 
         .btn-secondary {
@@ -156,7 +159,7 @@
             top: 0;
             width: 100%;
             z-index: 1000;
-            border-bottom: 1px solid rgba(213, 184, 113, 0.2); /* Faint gold border */
+            border-bottom: 1px solid rgba(240, 165, 0, 0.2); /* Faint yellow border */
             transition: var(--transition);
         }
 
@@ -267,8 +270,16 @@
             background-position: center;
             opacity: 0;
             transition: opacity 1.5s ease-in-out;
-            /* Added a dark maroon gradient overlay to ensure text visibility */
             background-color: var(--primary); 
+        }
+
+        /* Maroon Overlay for Hero Images */
+        .slide::after {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: linear-gradient(to right, rgba(106, 21, 35, 0.7), rgba(106, 21, 35, 0.4));
+            z-index: 1;
         }
 
         .slide.active {
@@ -607,7 +618,7 @@
             background-color: var(--primary);
             color: var(--bg-color);
             padding: 4rem 0 2rem;
-            border-top: 1px solid rgba(213, 184, 113, 0.2);
+            border-top: 1px solid rgba(240, 165, 0, 0.2);
         }
 
         .footer-grid {
@@ -1063,6 +1074,77 @@
             color: var(--primary);
         }
 
+        /* --- ABOUT STORY PAGE (ANIMATED) --- */
+        .about-hero {
+            height: 60vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            margin-top: -80px; /* Offset nav */
+        }
+        .about-hero-overlay {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(to bottom, rgba(106, 21, 35, 0.5), rgba(106, 21, 35, 0.8));
+        }
+        .about-hero-title {
+            position: relative;
+            color: var(--secondary);
+            font-size: 4rem;
+            letter-spacing: 4px;
+            z-index: 10;
+            text-shadow: 2px 2px 10px rgba(0,0,0,0.5);
+            text-align: center;
+        }
+        .about-content {
+            padding: 6rem 20px;
+            max-width: 1000px;
+        }
+        .story-block {
+            display: flex;
+            align-items: center;
+            gap: 4rem;
+            margin-bottom: 6rem;
+        }
+        .story-block.reverse {
+            flex-direction: row-reverse;
+        }
+        .story-img {
+            flex: 1;
+            /* Arch shape reminiscent of Indian architecture */
+            border-radius: 200px 200px 0 0; 
+            height: 500px;
+            object-fit: cover;
+            box-shadow: 0 15px 40px rgba(0, 121, 107, 0.1);
+        }
+        .story-text-content {
+            flex: 1;
+        }
+        .story-heading {
+            color: var(--primary);
+            font-size: 2.2rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+        .story-text {
+            color: var(--text-light);
+            font-size: 1.1rem;
+            line-height: 1.9;
+            margin-bottom: 1rem;
+        }
+        
+        /* Scroll Reveal Animations */
+        .reveal-element {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 1s cubic-bezier(0.2, 0.8, 0.2, 1);
+        }
+        .reveal-element.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
         /* --- MOBILE APP-LIKE EXPERIENCE --- */
         .bottom-nav { display: none; }
 
@@ -1076,6 +1158,9 @@
             
             .cart-container, .checkout-container { grid-template-columns: 1fr; }
             .product-modal { grid-template-columns: 1fr; }
+            
+            .story-block { gap: 2rem; }
+            .story-heading { font-size: 1.8rem; }
         }
 
         @media (max-width: 768px) {
@@ -1103,14 +1188,14 @@
                 z-index: 1000;
                 justify-content: space-around;
                 padding: 12px 0 15px;
-                border-top: 1px solid rgba(213, 184, 113, 0.2);
+                border-top: 1px solid rgba(240, 165, 0, 0.2);
                 padding-bottom: calc(15px + env(safe-area-inset-bottom)); /* iOS safe area */
             }
             .bottom-nav-item {
                 display: flex;
                 flex-direction: column;
                 align-items: center;
-                color: rgba(250, 246, 240, 0.6);
+                color: rgba(255, 251, 245, 0.6);
                 font-size: 0.75rem;
                 gap: 5px;
                 cursor: pointer;
@@ -1239,6 +1324,25 @@
                 border: none;
                 border-radius: 0;
             }
+
+            .story-block, .story-block.reverse {
+                flex-direction: column;
+                gap: 2rem;
+                margin-bottom: 4rem;
+                text-align: center;
+            }
+            .story-img {
+                width: 100%;
+                height: 400px;
+                border-radius: 100px 100px 0 0;
+            }
+            .about-hero-title {
+                font-size: 2.5rem;
+            }
+            .about-hero {
+                background-attachment: scroll; /* Fixes iOS parallax bug */
+                height: 50vh;
+            }
         }
 
         @media (max-width: 480px) {
@@ -1261,8 +1365,7 @@
             <nav class="nav-links" id="nav-links">
                 <a onclick="navigateTo('home')" class="nav-link active" data-target="home">Home</a>
                 <a onclick="navigateTo('shop')" class="nav-link" data-target="shop">Shop</a>
-                <a onclick="navigateTo('shop')" class="nav-link" data-target="collections">Collections</a>
-                <a onclick="scrollToFooter()" class="nav-link" data-target="about">About</a>
+                <a onclick="navigateTo('about')" class="nav-link" data-target="about">About</a>
             </nav>
             
             <div class="nav-icons">
@@ -1291,9 +1394,9 @@
             </div>
             <span>Cart</span>
         </div>
-        <div class="bottom-nav-item" onclick="scrollToFooter()" data-target="about">
+        <div class="bottom-nav-item" onclick="navigateTo('about')" data-target="about">
             <i class="fas fa-user"></i>
-            <span>Profile</span>
+            <span>Story</span>
         </div>
     </nav>
 
@@ -1303,10 +1406,28 @@
             <!-- Hero with Sliding Backgrounds -->
             <div class="hero">
                 <div class="hero-slides">
-                    <div class="slide active" style="background-image: linear-gradient(rgba(59, 19, 24, 0.4), rgba(59, 19, 24, 0.6)), url('https://images.pexels.com/photos/3370021/pexels-photo-3370021.jpeg?auto=compress&cs=tinysrgb&w=1600')"></div>
-                    <div class="slide" style="background-image: linear-gradient(rgba(59, 19, 24, 0.4), rgba(59, 19, 24, 0.6)), url('https://images.pexels.com/photos/2755165/pexels-photo-2755165.jpeg?auto=compress&cs=tinysrgb&w=1600')"></div>
-                    <div class="slide" style="background-image: linear-gradient(rgba(59, 19, 24, 0.4), rgba(59, 19, 24, 0.6)), url('https://images.pexels.com/photos/1385472/pexels-photo-1385472.jpeg?auto=compress&cs=tinysrgb&w=1600')"></div>
-                    <div class="slide" style="background-image: linear-gradient(rgba(59, 19, 24, 0.4), rgba(59, 19, 24, 0.6)), url('https://images.pexels.com/photos/2058145/pexels-photo-2058145.jpeg?auto=compress&cs=tinysrgb&w=1600')"></div>
+                    <!-- ========================================================== -->
+                    <!-- 🖼️ UPDATE YOUR HERO SLIDER IMAGE LINKS BELOW               -->
+                    <!-- Simply replace the link inside the url('...')              -->
+                    <!-- ========================================================== -->
+                    
+                    <!-- Slide 1 -->
+                    <div class="slide active" style="background-image: url('image1.png')"></div>
+                    
+                    <!-- Slide 2 -->
+                    <div class="slide" style="background-image: url('image2.png')"></div>
+                    
+                    <!-- Slide 3 -->
+                    <div class="slide" style="background-image: url('image3.png')"></div>
+                    
+                    <!-- Slide 4 -->
+                    <div class="slide" style="background-image: url('image4.png')"></div>
+
+                    <div class="slide" style="background-image: url('image5.png')"></div>
+
+                    
+                    
+                    <!-- You can add more slides by copying the line above -->
                 </div>
                 <div class="hero-content container fade-in">
                     <h1>Ethnic, Every Day.</h1>
@@ -1322,25 +1443,25 @@
             <section class="categories container">
                 <div class="category-grid">
                     <div class="category-card" onclick="filterAndNavigate('Everyday Kurtas')">
-                        <img src="https://images.pexels.com/photos/3518623/pexels-photo-3518623.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Everyday Kurtas" loading="lazy">
+                        <img src="everyday_kurta.png"Everyday Kurtas" loading="lazy">
                         <div class="category-overlay">
                             <h3>Everyday Kurtas</h3>
                         </div>
                     </div>
                     <div class="category-card" onclick="filterAndNavigate('Festive Edit')">
-                        <img src="https://images.pexels.com/photos/1488463/pexels-photo-1488463.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Festive Edit" loading="lazy">
+                        <img src="festive.png" alt="Festive Edit" loading="lazy">
                         <div class="category-overlay">
                             <h3>Festive Edit</h3>
                         </div>
                     </div>
                     <div class="category-card" onclick="filterAndNavigate('Workwear Ethnic')">
-                        <img src="https://images.pexels.com/photos/3828942/pexels-photo-3828942.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Workwear Ethnic" loading="lazy">
+                        <img src="work.png" alt="Workwear Ethnic" loading="lazy">
                         <div class="category-overlay">
                             <h3>Workwear Ethnic</h3>
                         </div>
                     </div>
                     <div class="category-card" onclick="filterAndNavigate('Comfort Co-ords')">
-                        <img src="https://images.pexels.com/photos/1055691/pexels-photo-1055691.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Comfort Co-ords" loading="lazy">
+                        <img src="workable.png" alt="Comfort Co-ords" loading="lazy">
                         <div class="category-overlay">
                             <h3>Comfort Co-ords</h3>
                         </div>
@@ -1361,7 +1482,7 @@
                 <h2 class="section-title">The KHUSSH Motion</h2>
                 <p class="section-subtitle">Experience the drape and flow of our everyday luxury</p>
                 <div class="video-wrapper">
-                    <video autoplay loop muted playsinline poster="https://images.pexels.com/photos/3370021/pexels-photo-3370021.jpeg?auto=compress&cs=tinysrgb&w=800">
+                    <video autoplay loop muted playsinline poster="Motion.png">
                         <!-- Fast loading CDN sample video -->
                         <source src="https://videos.pexels.com/video-files/8538890/8538890-hd_1920_1080_25fps.mp4" type="video/mp4">
                         Your browser does not support the video tag.
@@ -1387,11 +1508,9 @@
                     <h2 class="section-title">The Lookbook</h2>
                     <p class="section-subtitle">Style inspiration from the KHUSSH community</p>
                     <div class="lookbook-grid">
-                        <div class="lookbook-item"><img src="https://images.pexels.com/photos/2625232/pexels-photo-2625232.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Look 1" loading="lazy"></div>
-                        <div class="lookbook-item"><img src="https://images.pexels.com/photos/3050273/pexels-photo-3050273.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Look 2" loading="lazy"></div>
-                        <div class="lookbook-item"><img src="https://images.pexels.com/photos/1805586/pexels-photo-1805586.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Look 3" loading="lazy"></div>
-                        <div class="lookbook-item"><img src="https://images.pexels.com/photos/1040881/pexels-photo-1040881.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Look 4" loading="lazy"></div>
-                        <div class="lookbook-item"><img src="https://images.pexels.com/photos/2036646/pexels-photo-2036646.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Look 5" loading="lazy"></div>
+                        <div class="lookbook-item"><img src="lookbook.png" alt="Cultural Heritage" loading="lazy"></div>
+                        <div class="lookbook-item"><img src="lookbook2.png" alt="Cultural Heritage" loading="lazy"></div>
+                        
                     </div>
                 </div>
             </section>
@@ -1556,6 +1675,45 @@
             </div>
         </section>
 
+        <!-- VIEW: ABOUT STORY (ANIMATED) -->
+        <section id="view-about" class="page-view" style="padding: 0;">
+            <!-- ========================================================== -->
+            <!-- 🖼️ UPDATE YOUR ABOUT PAGE HERO IMAGE LINK BELOW            -->
+            <!-- ========================================================== -->
+            <div class="about-hero" style="background: url('https://images.pexels.com/photos/1385472/pexels-photo-1385472.jpeg?auto=compress&cs=tinysrgb&w=1600') center/cover fixed;">
+                <div class="about-hero-overlay"></div>
+                <h1 class="about-hero-title reveal-element">The Threads<br>That Bind Us</h1>
+            </div>
+            <div class="container about-content">
+                
+                <div class="story-block reveal-element">
+                    <div class="story-text-content" style="text-align: center; max-width: 800px; margin: 0 auto;">
+                        <h2 class="story-heading">A Lingering Memory</h2>
+                        <p class="story-text">It started with a simple, comforting memory. The soft rustle of a mother's cotton saree, the intricate block prints that whispered tales of distant artisan villages, and an effortless grace that required no special occasion.</p>
+                    </div>
+                </div>
+
+                <div class="story-block reverse reveal-element">
+                    <img src="https://images.pexels.com/photos/1040881/pexels-photo-1040881.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Heritage" class="story-img">
+                    <div class="story-text-content">
+                        <h2 class="story-heading">Beyond the Occasion</h2>
+                        <p class="story-text">As we stepped into boardrooms, coffee shops, and bustling city streets, we realized we were leaving our heritage behind in velvet boxes, reserved only for festivals and weddings. KHUSSH was born to break open those boxes.</p>
+                        <p class="story-text">We wanted to reclaim our roots not as costumes, but as our daily armor. Modern silhouettes infused with thousands of years of textile history.</p>
+                    </div>
+                </div>
+
+                <div class="story-block reveal-element">
+                    <img src="https://images.pexels.com/photos/7387346/pexels-photo-7387346.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Empowerment" class="story-img">
+                    <div class="story-text-content">
+                        <h2 class="story-heading">Empowerment in Every Stitch</h2>
+                        <p class="story-text">Every piece we create is a bridge between the hands of our skilled female artisans in rural India and the modern woman navigating her daily hustle. By choosing KHUSSH, you aren't just wearing a garment; you are wearing a legacy of resilience.</p>
+                        <p class="story-text" style="font-family: var(--font-heading); font-size: 1.5rem; color: var(--primary); margin-top: 2rem; font-style: italic;">"Own your roots. Own your day."</p>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
     </main>
 
     <!-- FOOTER -->
@@ -1592,7 +1750,7 @@
                 <div class="footer-links">
                     <h4>About KHUSSH</h4>
                     <ul>
-                        <li><a onclick="navigateToInfo('our-story')" style="cursor: pointer;">Our Story</a></li>
+                        <li><a onclick="navigateTo('about')" style="cursor: pointer;">Our Story</a></li>
                         <li><a onclick="navigateToInfo('sustainability')" style="cursor: pointer;">Sustainability</a></li>
                         <li><a onclick="navigateToInfo('journal')" style="cursor: pointer;">Journal</a></li>
                         <li><a onclick="navigateToInfo('careers')" style="cursor: pointer;">Careers</a></li>
@@ -1641,14 +1799,14 @@
     <script>
         // --- DATA ---
         const products = [
-            { id: 1, name: "Everyday Linen Kurta", price: 2200, category: "Everyday Kurtas", image: "https://images.pexels.com/photos/3518623/pexels-photo-3518623.jpeg?auto=compress&cs=tinysrgb&w=600", isBestSeller: true, desc: "A breathable, lightweight linen kurta designed for ultimate comfort during long work days. Features delicate threadwork on the neckline." },
-            { id: 2, name: "Ivory Cotton Co-ord Set", price: 3400, category: "Comfort Co-ords", image: "https://images.pexels.com/photos/1055691/pexels-photo-1055691.jpeg?auto=compress&cs=tinysrgb&w=600", isBestSeller: true, desc: "Monochrome elegance. This two-piece set includes a relaxed tunic and straight pants, made from the softest organic cotton." },
-            { id: 3, name: "Maroon Festive Kurta", price: 4200, category: "Festive Edit", image: "https://images.pexels.com/photos/1488463/pexels-photo-1488463.jpeg?auto=compress&cs=tinysrgb&w=600", isBestSeller: true, desc: "Rich maroon silk-blend kurta adorned with subtle gold zari work. Perfect for intimate gatherings and festive dinners." },
-            { id: 4, name: "Handblock Printed Kurta", price: 2800, category: "Everyday Kurtas", image: "https://images.pexels.com/photos/2625232/pexels-photo-2625232.jpeg?auto=compress&cs=tinysrgb&w=600", isBestSeller: true, desc: "Traditional Rajasthani handblock prints on a modern silhouette. Comes with practical side pockets." },
-            { id: 5, name: "Mulmul Daily Kurta", price: 1950, category: "Everyday Kurtas", image: "https://images.pexels.com/photos/1385472/pexels-photo-1385472.jpeg?auto=compress&cs=tinysrgb&w=600", isBestSeller: true, desc: "Experience the cloud-like feel of pure Mulmul cotton. Designed in a flowy A-line cut for ease of movement." },
-            { id: 6, name: "Gold Accent Kurta", price: 4800, category: "Festive Edit", image: "https://images.pexels.com/photos/2058145/pexels-photo-2058145.jpeg?auto=compress&cs=tinysrgb&w=600", isBestSeller: true, desc: "A premium chanderi kurta featuring delicate gold foil accents and a flattering V-neckline." },
-            { id: 7, name: "Indigo Workwear Tunic", price: 2600, category: "Workwear Ethnic", image: "https://images.pexels.com/photos/3828942/pexels-photo-3828942.jpeg?auto=compress&cs=tinysrgb&w=600", isBestSeller: false, desc: "Sharp, structured, yet inherently Indian. This indigo tunic pairs perfectly with trousers for a power-dressing ethnic look." },
-            { id: 8, name: "Blush Pink Co-ord", price: 3600, category: "Comfort Co-ords", image: "https://images.pexels.com/photos/2036646/pexels-photo-2036646.jpeg?auto=compress&cs=tinysrgb&w=600", isBestSeller: false, desc: "Transition from day to night effortlessly with this stylish blush pink coordinated set." }
+            { id: 1, name: "Everyday Linen Kurta", price: 2200, category: "Everyday Kurtas", image: "simple.png", isBestSeller: true, desc: "A breathable, lightweight linen kurta designed for ultimate comfort during long work days. Features delicate threadwork on the neckline." },
+            { id: 2, name: "Ivory Cotton Co-ord Set", price: 3400, category: "Comfort Co-ords", image: "cotton.png", isBestSeller: true, desc: "Monochrome elegance. This two-piece set includes a relaxed tunic and straight pants, made from the softest organic cotton." },
+            { id: 3, name: "Maroon Festive Kurta", price: 4200, category: "Festive Edit", image: "festive2.png", isBestSeller: true, desc: "Rich maroon silk-blend kurta adorned with subtle gold zari work. Perfect for intimate gatherings and festive dinners." },
+            { id: 4, name: "Handblock Printed Kurta", price: 2800, category: "Everyday Kurtas", image: "printed.png", isBestSeller: true, desc: "Traditional Rajasthani handblock prints on a modern silhouette. Comes with practical side pockets honoring regional weaving histories." },
+            { id: 5, name: "Mulmul Daily Kurta", price: 1950, category: "Everyday Kurtas", image: "daily.png", isBestSeller: true, desc: "Experience the cloud-like feel of pure Mulmul cotton. Designed in a flowy A-line cut for ease of movement and daily empowerment." },
+            { id: 6, name: "Gold Accent Kurta", price: 4800, category: "Festive Edit", image: "gold.png", isBestSeller: true, desc: "A premium chanderi kurta featuring delicate gold foil accents and a flattering V-neckline, celebrating the richness of Indian festivities." },
+            { id: 7, name: "Indigo Workwear Tunic", price: 2600, category: "Workwear Ethnic", image: "blue.png", isBestSeller: false, desc: "Sharp, structured, yet inherently Indian. This indigo tunic pairs perfectly with trousers for a power-dressing ethnic look." },
+            { id: 8, name: "Blush Pink Co-ord", price: 3600, category: "Comfort Co-ords", image: "pink.png", isBestSeller: false, desc: "Transition from day to night effortlessly with this stylish blush pink coordinated set, made for the dynamic modern woman." }
         ];
 
         const infoPagesData = {
@@ -1668,10 +1826,6 @@
                 title: 'Frequently Asked Questions',
                 content: '<h3>Do you ship internationally?</h3><p>Currently, we only ship within India. We plan to expand globally soon!</p><h3>How do I care for my linen/cotton garments?</h3><p>We recommend gentle hand wash or a delicate machine wash in cold water. Dry in shade to maintain the vibrant colors.</p><h3>Can I change my order after placing it?</h3><p>You can cancel or modify your order within 24 hours of placing it by contacting our support team.</p>'
             },
-            'our-story': {
-                title: 'Our Story',
-                content: '<p>KHUSSH was born from a simple idea: Indian wear shouldn\'t be confined to the back of the closet, waiting for a special occasion.</p><p>Founded in 2026, we aim to bridge the gap between traditional craftsmanship and modern utility. We source the finest breathable fabrics—linens, mulmul, and pure cottons—and tailor them into silhouettes that flatter the contemporary woman.</p><p>We believe in "Ethnic, Every Day."</p>'
-            },
             'sustainability': {
                 title: 'Sustainability',
                 content: '<p>At KHUSSH, we are committed to mindful fashion.</p><ul><li><strong>Fabrics:</strong> We strictly use natural, biodegradable fibers.</li><li><strong>Artisans:</strong> We partner directly with local artisan clusters, ensuring fair wages and preserving traditional handblock and weaving techniques.</li><li><strong>Packaging:</strong> All our orders are shipped in 100% plastic-free, compostable packaging.</li></ul>'
@@ -1689,6 +1843,15 @@
         // --- STATE ---
         let cart = JSON.parse(localStorage.getItem('khussh_cart')) || [];
         let currentModalSize = 'XS';
+        
+        // --- ANIMATION OBSERVER ---
+        const scrollObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.15, rootMargin: '0px 0px -50px 0px' });
 
         // --- INITIALIZATION ---
         document.addEventListener('DOMContentLoaded', () => {
@@ -1698,6 +1861,9 @@
             
             // Start Hero Slider
             initHeroSlider();
+            
+            // Initialize Scroll Animations
+            document.querySelectorAll('.reveal-element').forEach(el => scrollObserver.observe(el));
             
             // Header scroll effect
             window.addEventListener('scroll', () => {
@@ -1752,6 +1918,15 @@
             if(viewId === 'shop') {
                 document.getElementById('category-filter').value = 'all';
                 applyFilters();
+            }
+            
+            // Retrigger animations if navigating to about
+            if(viewId === 'about') {
+                document.querySelectorAll('.reveal-element').forEach(el => {
+                    el.classList.remove('visible');
+                    // Small timeout to allow display:block to register before observing
+                    setTimeout(() => scrollObserver.observe(el), 50);
+                });
             }
 
             // Close mobile menu and scroll to top
