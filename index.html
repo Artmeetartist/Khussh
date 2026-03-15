@@ -1,0 +1,2122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KHUSSH | Ethnic, Every Day</title>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* CSS VARIABLES - BRAND COLORS & TYPOGRAPHY */
+        :root {
+            --bg-color: #FAF6F0; /* Warm ivory for readability */
+            --primary: #3B1318; /* Deep Maroon from Logo */
+            --secondary: #D5B871; /* Champagne Gold from Logo */
+            --text-dark: #2B2B2B;
+            --text-light: #555555;
+            --white: #FFFFFF;
+            --border-color: #EADAC3;
+            
+            --font-heading: 'Cinzel', serif;
+            --font-body: 'Montserrat', sans-serif;
+            
+            --transition: all 0.3s ease;
+        }
+
+        /* RESET & BASE */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-body);
+            background-color: var(--bg-color);
+            color: var(--text-dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: var(--font-heading);
+            font-weight: 400;
+            color: var(--text-dark);
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+            transition: var(--transition);
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        button {
+            cursor: pointer;
+            font-family: var(--font-body);
+            border: none;
+            outline: none;
+            background: none;
+            transition: var(--transition);
+        }
+
+        /* UTILITIES */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+
+        .section-subtitle {
+            text-align: center;
+            font-size: 1rem;
+            color: var(--text-light);
+            margin-bottom: 3rem;
+            font-weight: 300;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 500;
+            border-radius: 0;
+        }
+
+        .btn-primary {
+            background-color: var(--primary);
+            color: var(--secondary);
+            border: 1px solid var(--primary);
+        }
+
+        .btn-primary:hover {
+            background-color: var(--secondary);
+            color: var(--primary);
+            border-color: var(--secondary);
+        }
+
+        .btn-secondary {
+            background-color: transparent;
+            color: var(--primary);
+            border: 1px solid var(--primary);
+        }
+
+        .btn-secondary:hover {
+            background-color: var(--primary);
+            color: var(--secondary);
+        }
+
+        .fade-in {
+            animation: fadeIn 0.8s ease forwards;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* VIEW ROUTING */
+        .page-view {
+            display: none;
+            min-height: 60vh;
+            padding: 80px 0 60px;
+            animation: fadeIn 0.5s ease;
+        }
+        .page-view.active {
+            display: block;
+        }
+
+        /* NAVBAR */
+        header {
+            background-color: var(--primary);
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(213, 184, 113, 0.2); /* Faint gold border */
+            transition: var(--transition);
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 80px;
+        }
+
+        .logo {
+            font-family: var(--font-heading);
+            font-size: 2.2rem;
+            font-weight: 500;
+            color: var(--secondary);
+            letter-spacing: 4px;
+            cursor: pointer;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 500;
+            cursor: pointer;
+            color: var(--bg-color);
+        }
+
+        .nav-links a:hover, .nav-links a.active {
+            color: var(--secondary);
+        }
+
+        .nav-icons {
+            display: flex;
+            gap: 1.5rem;
+            align-items: center;
+            color: var(--bg-color);
+        }
+
+        .cart-icon-wrapper {
+            position: relative;
+            cursor: pointer;
+            font-size: 1.2rem;
+        }
+
+        .cart-icon-wrapper:hover {
+            color: var(--secondary);
+        }
+
+        .cart-count {
+            position: absolute;
+            top: -8px;
+            right: -10px;
+            background-color: var(--secondary);
+            color: var(--primary);
+            font-size: 0.7rem;
+            font-weight: bold;
+            height: 18px;
+            width: 18px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--secondary);
+        }
+
+        /* HERO SECTION */
+        .hero {
+            position: relative;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: var(--white);
+            margin-top: -80px; /* offset nav */
+            padding-top: 80px;
+            overflow: hidden;
+        }
+
+        .hero-slides {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            opacity: 0;
+            transition: opacity 1.5s ease-in-out;
+            /* Added a dark maroon gradient overlay to ensure text visibility */
+            background-color: var(--primary); 
+        }
+
+        .slide.active {
+            opacity: 1;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 10;
+        }
+
+        .hero-content h1 {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            color: var(--white);
+            letter-spacing: 2px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .hero-content p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            font-weight: 300;
+            letter-spacing: 1px;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+        }
+
+        .hero-btns {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+        }
+
+        .btn-white {
+            background-color: var(--white);
+            color: var(--primary);
+            border: 1px solid var(--white);
+        }
+        .btn-white:hover {
+            background-color: var(--secondary);
+            color: var(--primary);
+            border-color: var(--secondary);
+        }
+        .btn-outline-white {
+            border: 1px solid var(--white);
+            color: var(--white);
+        }
+        .btn-outline-white:hover {
+            background-color: var(--white);
+            color: var(--primary);
+        }
+
+        /* CATEGORIES */
+        .categories {
+            padding: 5rem 0;
+        }
+
+        .category-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
+        }
+
+        .category-card {
+            position: relative;
+            height: 400px;
+            overflow: hidden;
+            cursor: pointer;
+            group: category;
+        }
+
+        .category-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.8s ease;
+        }
+
+        .category-card:hover img {
+            transform: scale(1.08);
+        }
+
+        .category-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            padding: 2rem 1rem;
+            background: linear-gradient(transparent, rgba(0,0,0,0.7));
+            color: var(--white);
+            text-align: center;
+        }
+
+        .category-overlay h3 {
+            color: var(--white);
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        /* BRAND STORY */
+        .brand-story {
+            background-color: var(--primary);
+            color: var(--white);
+            padding: 6rem 0;
+            text-align: center;
+        }
+
+        .brand-story-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .brand-story h2 {
+            color: var(--secondary);
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .brand-story p {
+            font-size: 1.2rem;
+            font-weight: 300;
+            line-height: 1.8;
+            font-family: var(--font-heading);
+            font-style: italic;
+            color: var(--bg-color);
+        }
+
+        /* CAMPAIGN VIDEO */
+        .campaign-video {
+            padding: 5rem 0;
+            background-color: var(--bg-color);
+        }
+
+        .video-wrapper {
+            position: relative;
+            width: 100%;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            aspect-ratio: 16/9;
+            background-color: #eee;
+        }
+
+        .video-wrapper video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* PRODUCT CARDS */
+        .products-section {
+            padding: 5rem 0;
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 2.5rem 1.5rem;
+        }
+
+        .product-card {
+            text-align: center;
+            group: product;
+        }
+
+        .product-image-wrapper {
+            position: relative;
+            overflow: hidden;
+            aspect-ratio: 3/4;
+            margin-bottom: 1rem;
+            cursor: pointer;
+        }
+
+        .product-image-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .product-card:hover .product-image-wrapper img {
+            transform: scale(1.05);
+        }
+
+        .quick-add {
+            position: absolute;
+            bottom: -50px;
+            left: 0;
+            width: 100%;
+            background-color: rgba(255,255,255,0.9);
+            padding: 15px;
+            transition: bottom 0.3s ease;
+            display: flex;
+            justify-content: center;
+            opacity: 0;
+        }
+
+        .product-card:hover .quick-add {
+            bottom: 0;
+            opacity: 1;
+        }
+
+        .product-title {
+            font-family: var(--font-body);
+            font-weight: 500;
+            font-size: 1rem;
+            margin-bottom: 0.5rem;
+            cursor: pointer;
+        }
+        .product-title:hover {
+            color: var(--primary);
+        }
+
+        .product-price {
+            color: var(--text-light);
+            font-weight: 400;
+        }
+
+        /* LOOKBOOK */
+        .lookbook {
+            padding: 5rem 0;
+            background-color: #fff;
+        }
+
+        .lookbook-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            grid-auto-rows: 300px;
+            gap: 10px;
+        }
+
+        .lookbook-item {
+            overflow: hidden;
+        }
+
+        .lookbook-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+        
+        .lookbook-item:hover img {
+            opacity: 0.9;
+            transform: scale(1.02);
+        }
+
+        .lookbook-item:nth-child(1) { grid-column: span 2; grid-row: span 2; }
+        .lookbook-item:nth-child(2) { grid-column: span 2; }
+        .lookbook-item:nth-child(4) { grid-column: span 2; }
+
+        /* TESTIMONIALS */
+        .testimonials {
+            padding: 5rem 0;
+            background-color: var(--bg-color);
+            text-align: center;
+        }
+
+        .testimonial-slider {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .testimonial-card {
+            padding: 2rem;
+            background: #fff;
+            border: 1px solid var(--border-color);
+            margin: 1rem;
+        }
+
+        .stars {
+            color: var(--secondary);
+            margin-bottom: 1rem;
+        }
+
+        .testimonial-text {
+            font-style: italic;
+            margin-bottom: 1.5rem;
+            font-family: var(--font-heading);
+            font-size: 1.1rem;
+        }
+
+        .testimonial-name {
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.8rem;
+            letter-spacing: 1px;
+        }
+
+        /* NEWSLETTER */
+        .newsletter {
+            padding: 5rem 0;
+            background-color: var(--primary);
+            color: var(--white);
+            text-align: center;
+        }
+
+        .newsletter h2 {
+            color: var(--secondary);
+        }
+
+        .newsletter p {
+            color: var(--bg-color);
+        }
+
+        .newsletter-form {
+            display: flex;
+            max-width: 500px;
+            margin: 2rem auto 0;
+        }
+
+        .newsletter-form input {
+            flex: 1;
+            padding: 12px 20px;
+            border: none;
+            outline: none;
+            font-family: var(--font-body);
+        }
+
+        .newsletter-form button {
+            background-color: var(--secondary);
+            color: var(--primary);
+            padding: 12px 30px;
+            text-transform: uppercase;
+            font-weight: bold;
+            letter-spacing: 1px;
+            border: 1px solid var(--secondary);
+        }
+        .newsletter-form button:hover {
+            background-color: transparent;
+            color: var(--secondary);
+        }
+
+        /* FOOTER */
+        footer {
+            background-color: var(--primary);
+            color: var(--bg-color);
+            padding: 4rem 0 2rem;
+            border-top: 1px solid rgba(213, 184, 113, 0.2);
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-brand h3 {
+            color: var(--white);
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            letter-spacing: 2px;
+        }
+
+        .footer-brand p {
+            color: #aaa;
+            font-size: 0.9rem;
+            max-width: 300px;
+        }
+
+        .footer-links h4 {
+            color: var(--secondary);
+            margin-bottom: 1.2rem;
+            font-size: 1.1rem;
+        }
+
+        .footer-links ul li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-links a {
+            color: #aaa;
+            font-size: 0.9rem;
+        }
+        .footer-links a:hover {
+            color: var(--secondary);
+            padding-left: 5px;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-icons a {
+            color: #aaa;
+            font-size: 1.2rem;
+        }
+        .social-icons a:hover {
+            color: var(--secondary);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid #444;
+            color: #888;
+            font-size: 0.8rem;
+        }
+
+        /* --- SHOP SECTION SPECIFICS --- */
+        .shop-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .filters {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .filter-select {
+            padding: 10px 15px;
+            border: 1px solid var(--border-color);
+            background-color: transparent;
+            font-family: var(--font-body);
+            color: var(--text-dark);
+            outline: none;
+            cursor: pointer;
+        }
+
+        /* --- CART PAGE SPECIFICS --- */
+        .cart-container {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 3rem;
+            margin-top: 2rem;
+        }
+
+        .cart-items {
+            border-top: 1px solid var(--border-color);
+        }
+
+        .cart-item {
+            display: flex;
+            gap: 1.5rem;
+            padding: 1.5rem 0;
+            border-bottom: 1px solid var(--border-color);
+            align-items: center;
+        }
+
+        .cart-item-img {
+            width: 100px;
+            height: 130px;
+            object-fit: cover;
+        }
+
+        .cart-item-details {
+            flex: 1;
+        }
+
+        .cart-item-title {
+            font-weight: 500;
+            margin-bottom: 0.3rem;
+        }
+
+        .cart-item-size {
+            font-size: 0.8rem;
+            color: var(--text-light);
+            margin-bottom: 1rem;
+        }
+
+        .qty-controls {
+            display: flex;
+            align-items: center;
+            border: 1px solid var(--border-color);
+            width: fit-content;
+        }
+
+        .qty-btn {
+            padding: 5px 10px;
+            font-size: 1.2rem;
+        }
+
+        .qty-input {
+            width: 40px;
+            text-align: center;
+            border: none;
+            font-family: var(--font-body);
+            pointer-events: none;
+        }
+
+        .cart-item-price {
+            font-weight: 600;
+        }
+
+        .remove-btn {
+            color: var(--text-light);
+            font-size: 0.8rem;
+            text-decoration: underline;
+            margin-left: 1rem;
+        }
+        .remove-btn:hover {
+            color: var(--primary);
+        }
+
+        .cart-summary {
+            background-color: #fff;
+            padding: 2rem;
+            border: 1px solid var(--border-color);
+            height: fit-content;
+        }
+
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+        }
+
+        .summary-total {
+            font-weight: 600;
+            font-size: 1.2rem;
+            border-top: 1px solid var(--border-color);
+            padding-top: 1rem;
+            margin-top: 1rem;
+        }
+
+        .checkout-btn {
+            width: 100%;
+            margin-top: 1.5rem;
+            text-align: center;
+        }
+
+        /* --- CHECKOUT PAGE SPECIFICS --- */
+        .checkout-container {
+            display: grid;
+            grid-template-columns: 2fr 1.5fr;
+            gap: 3rem;
+            margin-top: 2rem;
+        }
+
+        .form-section {
+            background: #fff;
+            padding: 2rem;
+            border: 1px solid var(--border-color);
+            margin-bottom: 2rem;
+        }
+
+        .form-section h3 {
+            margin-bottom: 1.5rem;
+            font-size: 1.4rem;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 0.5rem;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group.full {
+            grid-column: span 2;
+        }
+
+        .form-group label {
+            font-size: 0.85rem;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+
+        .form-group input {
+            padding: 12px;
+            border: 1px solid var(--border-color);
+            font-family: var(--font-body);
+            outline: none;
+            background: var(--bg-color);
+        }
+        .form-group input:focus {
+            border-color: var(--primary);
+        }
+
+        .payment-methods {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .payment-label {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 15px;
+            border: 1px solid var(--border-color);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .payment-label:hover {
+            border-color: var(--primary);
+        }
+
+        .payment-label input[type="radio"] {
+            accent-color: var(--primary);
+        }
+
+        /* --- PRODUCT MODAL --- */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.6);
+            z-index: 2000;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .modal-overlay.active {
+            display: flex;
+            opacity: 1;
+        }
+
+        .product-modal {
+            background: #fff;
+            width: 90%;
+            max-width: 900px;
+            max-height: 90vh;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            position: relative;
+            overflow-y: auto;
+            transform: translateY(20px);
+            transition: transform 0.3s ease;
+        }
+
+        .modal-overlay.active .product-modal {
+            transform: translateY(0);
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 1.5rem;
+            color: var(--text-dark);
+            z-index: 10;
+        }
+        .close-modal:hover { color: var(--primary); }
+
+        .modal-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            min-height: 400px;
+        }
+
+        .modal-details {
+            padding: 3rem 2.5rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .modal-title {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .modal-price {
+            font-size: 1.3rem;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            font-weight: 500;
+        }
+
+        .modal-desc {
+            font-size: 0.95rem;
+            color: var(--text-light);
+            margin-bottom: 2rem;
+        }
+
+        .size-selector {
+            margin-bottom: 2rem;
+        }
+
+        .size-selector label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+
+        .size-options {
+            display: flex;
+            gap: 10px;
+        }
+
+        .size-btn {
+            width: 40px;
+            height: 40px;
+            border: 1px solid var(--border-color);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .size-btn.selected {
+            background-color: var(--primary);
+            color: var(--white);
+            border-color: var(--primary);
+        }
+
+        /* --- TOAST NOTIFICATION --- */
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background-color: var(--text-dark);
+            color: var(--white);
+            padding: 12px 24px;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            z-index: 3000;
+            opacity: 0;
+            transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+
+        .toast.show {
+            transform: translateX(-50%) translateY(0);
+            opacity: 1;
+        }
+
+        /* --- EMPTY STATES --- */
+        .empty-state {
+            text-align: center;
+            padding: 4rem 0;
+            grid-column: 1 / -1;
+        }
+
+        /* --- INFO PAGES --- */
+        .info-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: #fff;
+            padding: 3rem;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+        }
+        .info-content h3 {
+            margin: 2rem 0 1rem;
+            font-size: 1.3rem;
+            color: var(--primary);
+        }
+        .info-content p {
+            margin-bottom: 1rem;
+            color: var(--text-light);
+            line-height: 1.8;
+        }
+        .info-content ul {
+            list-style-type: disc;
+            margin-left: 2rem;
+            margin-bottom: 1rem;
+            color: var(--text-light);
+            line-height: 1.8;
+        }
+        .info-content ul li {
+            margin-bottom: 0.5rem;
+        }
+        .size-chart {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1.5rem;
+        }
+        .size-chart th, .size-chart td {
+            border: 1px solid var(--border-color);
+            padding: 12px;
+            text-align: center;
+        }
+        .size-chart th {
+            background-color: var(--bg-color);
+            font-family: var(--font-heading);
+            color: var(--primary);
+        }
+
+        /* --- MOBILE APP-LIKE EXPERIENCE --- */
+        .bottom-nav { display: none; }
+
+        /* --- RESPONSIVE DESIGN --- */
+        @media (max-width: 992px) {
+            .category-grid { grid-template-columns: repeat(2, 1fr); }
+            .lookbook-grid { grid-template-columns: repeat(2, 1fr); }
+            .lookbook-item:nth-child(1) { grid-column: span 1; grid-row: span 1; }
+            .lookbook-item:nth-child(2) { grid-column: span 1; }
+            .lookbook-item:nth-child(4) { grid-column: span 2; }
+            
+            .cart-container, .checkout-container { grid-template-columns: 1fr; }
+            .product-modal { grid-template-columns: 1fr; }
+        }
+
+        @media (max-width: 768px) {
+            /* Hide desktop navigation elements */
+            .nav-links, .nav-icons, .mobile-menu-btn { display: none !important; }
+            
+            .video-wrapper {
+                aspect-ratio: 9/16;
+                border-radius: 8px;
+            }
+            
+            /* Center Logo in Top Header */
+            header .navbar { justify-content: center; }
+            
+            /* App-like Bottom Navigation */
+            body { padding-bottom: 70px; } /* Space for bottom nav */
+            .bottom-nav {
+                display: flex;
+                position: fixed;
+                bottom: 0;
+                left: 0;
+                width: 100%;
+                background-color: var(--primary);
+                box-shadow: 0 -2px 15px rgba(0,0,0,0.3);
+                z-index: 1000;
+                justify-content: space-around;
+                padding: 12px 0 15px;
+                border-top: 1px solid rgba(213, 184, 113, 0.2);
+                padding-bottom: calc(15px + env(safe-area-inset-bottom)); /* iOS safe area */
+            }
+            .bottom-nav-item {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                color: rgba(250, 246, 240, 0.6);
+                font-size: 0.75rem;
+                gap: 5px;
+                cursor: pointer;
+                transition: color 0.2s ease;
+            }
+            .bottom-nav-item.active { color: var(--secondary); font-weight: 500; }
+            .bottom-nav-item i { font-size: 1.3rem; }
+            .bottom-nav-item .cart-icon-wrapper { font-size: 1.3rem; }
+
+            /* Hero adjustments */
+            .hero { margin-top: -80px; height: 85vh; }
+            .hero-content h1 { font-size: 2.8rem; }
+            
+            /* Edge-to-Edge Swipeable Categories */
+            .category-grid {
+                display: flex;
+                overflow-x: auto;
+                scroll-snap-type: x mandatory;
+                gap: 15px;
+                margin: 0 -20px;
+                padding: 0 20px 20px;
+                scrollbar-width: none; /* Firefox */
+                -webkit-overflow-scrolling: touch;
+            }
+            .category-grid::-webkit-scrollbar { display: none; }
+            .category-card {
+                flex: 0 0 72%; /* Shows a peek of the next item */
+                scroll-snap-align: center;
+                height: 380px;
+                border-radius: 12px;
+            }
+
+            /* App-like 2-Column Product Grid */
+            .product-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 15px 10px;
+            }
+            .product-image-wrapper { border-radius: 8px; }
+            .quick-add { display: none; } /* Disable hover button on touch */
+            .product-title {
+                font-size: 0.85rem;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+            .product-price { font-weight: 600; font-size: 0.95rem; }
+            
+            /* Edge-to-Edge Lookbook */
+            .lookbook-grid {
+                display: flex;
+                overflow-x: auto;
+                scroll-snap-type: x mandatory;
+                gap: 12px;
+                margin: 0 -20px;
+                padding: 0 20px;
+                scrollbar-width: none;
+            }
+            .lookbook-grid::-webkit-scrollbar { display: none; }
+            .lookbook-item {
+                flex: 0 0 85%;
+                scroll-snap-align: center;
+                height: 450px;
+                border-radius: 12px;
+            }
+            .lookbook-item img { border-radius: 12px; }
+
+            /* Slide-Up Bottom Sheet Modal */
+            .product-modal {
+                height: 90vh;
+                max-height: 90vh;
+                width: 100%;
+                position: absolute;
+                bottom: 0;
+                transform: translateY(100%);
+                border-radius: 24px 24px 0 0;
+                padding-bottom: 80px;
+                transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+            }
+            .modal-overlay.active .product-modal { transform: translateY(0); }
+            .modal-image {
+                height: 50vh;
+                min-height: auto;
+                border-radius: 24px 24px 0 0;
+            }
+            .modal-details {
+                padding: 1.5rem;
+                padding-bottom: 2rem;
+            }
+            .close-modal { top: 15px; right: 15px; background: white; border-radius: 50%; width: 35px; height: 35px; display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+            #modal-add-btn {
+                position: fixed;
+                bottom: 0;
+                left: 0;
+                width: 100%;
+                height: 65px;
+                border-radius: 0;
+                z-index: 2000;
+                box-shadow: 0 -4px 15px rgba(0,0,0,0.1);
+                font-size: 1.1rem;
+                padding-bottom: env(safe-area-inset-bottom);
+            }
+
+            /* Cart & Checkout App Sticky CTAs */
+            .cart-summary { padding-bottom: 80px; border: none; padding: 1rem 0; }
+            .checkout-btn {
+                position: fixed;
+                bottom: 70px; /* Above bottom nav */
+                left: 0;
+                width: 100%;
+                margin: 0;
+                height: 60px;
+                z-index: 100;
+                box-shadow: 0 -4px 15px rgba(0,0,0,0.08);
+            }
+            #view-checkout .checkout-btn { bottom: 70px; }
+            .toast { bottom: 90px; } /* Lift toast above bottom nav */
+            
+            /* General formatting */
+            .footer-grid { grid-template-columns: 1fr; text-align: center; }
+            .social-icons { justify-content: center; }
+            .form-grid { grid-template-columns: 1fr; }
+            .form-group.full { grid-column: auto; }
+            
+            .info-container {
+                padding: 1.5rem;
+                border: none;
+                border-radius: 0;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-btns { flex-direction: column; }
+        }
+
+    </style>
+</head>
+<body>
+
+    <!-- NAVBAR -->
+    <header id="header">
+        <div class="container navbar">
+            <div class="mobile-menu-btn" onclick="toggleMobileMenu()">
+                <i class="fas fa-bars"></i>
+            </div>
+            
+            <div class="logo" onclick="navigateTo('home')">KHUSSH</div>
+            
+            <nav class="nav-links" id="nav-links">
+                <a onclick="navigateTo('home')" class="nav-link active" data-target="home">Home</a>
+                <a onclick="navigateTo('shop')" class="nav-link" data-target="shop">Shop</a>
+                <a onclick="navigateTo('shop')" class="nav-link" data-target="collections">Collections</a>
+                <a onclick="scrollToFooter()" class="nav-link" data-target="about">About</a>
+            </nav>
+            
+            <div class="nav-icons">
+                <div class="cart-icon-wrapper" onclick="navigateTo('cart')">
+                    <i class="fas fa-shopping-bag"></i>
+                    <span class="cart-count" id="cart-count">0</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- MOBILE BOTTOM NAVIGATION -->
+    <nav class="bottom-nav">
+        <div class="bottom-nav-item active" onclick="navigateTo('home')" data-target="home">
+            <i class="fas fa-home"></i>
+            <span>Home</span>
+        </div>
+        <div class="bottom-nav-item" onclick="navigateTo('shop')" data-target="shop">
+            <i class="fas fa-th-large"></i>
+            <span>Shop</span>
+        </div>
+        <div class="bottom-nav-item" onclick="navigateTo('cart')" data-target="cart">
+            <div class="cart-icon-wrapper">
+                <i class="fas fa-shopping-bag"></i>
+                <span class="cart-count" id="mobile-cart-count">0</span>
+            </div>
+            <span>Cart</span>
+        </div>
+        <div class="bottom-nav-item" onclick="scrollToFooter()" data-target="about">
+            <i class="fas fa-user"></i>
+            <span>Profile</span>
+        </div>
+    </nav>
+
+    <main>
+        <!-- VIEW: HOME -->
+        <section id="view-home" class="page-view active">
+            <!-- Hero with Sliding Backgrounds -->
+            <div class="hero">
+                <div class="hero-slides">
+                    <div class="slide active" style="background-image: linear-gradient(rgba(59, 19, 24, 0.4), rgba(59, 19, 24, 0.6)), url('https://images.pexels.com/photos/3370021/pexels-photo-3370021.jpeg?auto=compress&cs=tinysrgb&w=1600')"></div>
+                    <div class="slide" style="background-image: linear-gradient(rgba(59, 19, 24, 0.4), rgba(59, 19, 24, 0.6)), url('https://images.pexels.com/photos/2755165/pexels-photo-2755165.jpeg?auto=compress&cs=tinysrgb&w=1600')"></div>
+                    <div class="slide" style="background-image: linear-gradient(rgba(59, 19, 24, 0.4), rgba(59, 19, 24, 0.6)), url('https://images.pexels.com/photos/1385472/pexels-photo-1385472.jpeg?auto=compress&cs=tinysrgb&w=1600')"></div>
+                    <div class="slide" style="background-image: linear-gradient(rgba(59, 19, 24, 0.4), rgba(59, 19, 24, 0.6)), url('https://images.pexels.com/photos/2058145/pexels-photo-2058145.jpeg?auto=compress&cs=tinysrgb&w=1600')"></div>
+                </div>
+                <div class="hero-content container fade-in">
+                    <h1>Ethnic, Every Day.</h1>
+                    <p>Redefining Indian wear for everyday elegance.</p>
+                    <div class="hero-btns">
+                        <button class="btn btn-white" onclick="navigateTo('shop')">Shop Now</button>
+                        <button class="btn btn-outline-white" onclick="navigateTo('shop')">Explore Collection</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Categories -->
+            <section class="categories container">
+                <div class="category-grid">
+                    <div class="category-card" onclick="filterAndNavigate('Everyday Kurtas')">
+                        <img src="https://images.pexels.com/photos/3518623/pexels-photo-3518623.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Everyday Kurtas" loading="lazy">
+                        <div class="category-overlay">
+                            <h3>Everyday Kurtas</h3>
+                        </div>
+                    </div>
+                    <div class="category-card" onclick="filterAndNavigate('Festive Edit')">
+                        <img src="https://images.pexels.com/photos/1488463/pexels-photo-1488463.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Festive Edit" loading="lazy">
+                        <div class="category-overlay">
+                            <h3>Festive Edit</h3>
+                        </div>
+                    </div>
+                    <div class="category-card" onclick="filterAndNavigate('Workwear Ethnic')">
+                        <img src="https://images.pexels.com/photos/3828942/pexels-photo-3828942.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Workwear Ethnic" loading="lazy">
+                        <div class="category-overlay">
+                            <h3>Workwear Ethnic</h3>
+                        </div>
+                    </div>
+                    <div class="category-card" onclick="filterAndNavigate('Comfort Co-ords')">
+                        <img src="https://images.pexels.com/photos/1055691/pexels-photo-1055691.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Comfort Co-ords" loading="lazy">
+                        <div class="category-overlay">
+                            <h3>Comfort Co-ords</h3>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Brand Story -->
+            <section class="brand-story">
+                <div class="container brand-story-content">
+                    <h2>Our Philosophy</h2>
+                    <p>"Why should ethnic wear be reserved for weddings and occasional festivities? KHUSSH celebrates the intricate Indian craftsmanship, blending it seamlessly into your everyday life with comfort and uncompromising elegance."</p>
+                </div>
+            </section>
+
+            <!-- Campaign Video -->
+            <section class="campaign-video container">
+                <h2 class="section-title">The KHUSSH Motion</h2>
+                <p class="section-subtitle">Experience the drape and flow of our everyday luxury</p>
+                <div class="video-wrapper">
+                    <video autoplay loop muted playsinline poster="https://images.pexels.com/photos/3370021/pexels-photo-3370021.jpeg?auto=compress&cs=tinysrgb&w=800">
+                        <!-- Fast loading CDN sample video -->
+                        <source src="https://videos.pexels.com/video-files/8538890/8538890-hd_1920_1080_25fps.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+            </section>
+
+            <!-- Best Sellers -->
+            <section class="products-section container">
+                <h2 class="section-title">Best Sellers</h2>
+                <p class="section-subtitle">Loved by modern Indian women</p>
+                <div class="product-grid" id="bestsellers-grid">
+                    <!-- Populated by JS -->
+                </div>
+                <div style="text-align: center; margin-top: 3rem;">
+                    <button class="btn btn-secondary" onclick="navigateTo('shop')">View All Products</button>
+                </div>
+            </section>
+
+            <!-- Lookbook -->
+            <section class="lookbook">
+                <div class="container">
+                    <h2 class="section-title">The Lookbook</h2>
+                    <p class="section-subtitle">Style inspiration from the KHUSSH community</p>
+                    <div class="lookbook-grid">
+                        <div class="lookbook-item"><img src="https://images.pexels.com/photos/2625232/pexels-photo-2625232.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Look 1" loading="lazy"></div>
+                        <div class="lookbook-item"><img src="https://images.pexels.com/photos/3050273/pexels-photo-3050273.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Look 2" loading="lazy"></div>
+                        <div class="lookbook-item"><img src="https://images.pexels.com/photos/1805586/pexels-photo-1805586.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Look 3" loading="lazy"></div>
+                        <div class="lookbook-item"><img src="https://images.pexels.com/photos/1040881/pexels-photo-1040881.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Look 4" loading="lazy"></div>
+                        <div class="lookbook-item"><img src="https://images.pexels.com/photos/2036646/pexels-photo-2036646.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Look 5" loading="lazy"></div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Testimonials -->
+            <section class="testimonials">
+                <div class="container">
+                    <h2 class="section-title">Client Love</h2>
+                    <div class="testimonial-slider">
+                        <div class="testimonial-card">
+                            <div class="stars">★★★★★</div>
+                            <p class="testimonial-text">"I absolutely love my linen kurta from KHUSSH. The fit is incredibly flattering and it's comfortable enough to wear to the office all day. True luxury everyday."</p>
+                            <p class="testimonial-name">Priya Sharma</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Newsletter -->
+            <section class="newsletter">
+                <div class="container">
+                    <h2>Join the KHUSSH Family</h2>
+                    <p>Subscribe to receive updates, access to exclusive deals, and more.</p>
+                    <form class="newsletter-form" onsubmit="event.preventDefault(); showToast('Subscribed successfully!'); this.reset();">
+                        <input type="email" placeholder="Enter your email address" required>
+                        <button type="submit">Subscribe</button>
+                    </form>
+                </div>
+            </section>
+        </section>
+
+        <!-- VIEW: SHOP -->
+        <section id="view-shop" class="page-view">
+            <div class="container">
+                <h1 class="section-title" style="margin-top: 2rem;">Shop Collection</h1>
+                <p class="section-subtitle">Discover our full range of everyday elegance.</p>
+                
+                <div class="shop-header">
+                    <p id="product-count-text">Showing all products</p>
+                    <div class="filters">
+                        <select class="filter-select" id="category-filter" onchange="applyFilters()">
+                            <option value="all">All Categories</option>
+                            <option value="Everyday Kurtas">Everyday Kurtas</option>
+                            <option value="Festive Edit">Festive Edit</option>
+                            <option value="Workwear Ethnic">Workwear Ethnic</option>
+                            <option value="Comfort Co-ords">Comfort Co-ords</option>
+                        </select>
+                        <select class="filter-select" id="sort-filter" onchange="applyFilters()">
+                            <option value="default">Sort by: Featured</option>
+                            <option value="price-low">Price: Low to High</option>
+                            <option value="price-high">Price: High to Low</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="product-grid" id="shop-grid">
+                    <!-- Populated by JS -->
+                </div>
+            </div>
+        </section>
+
+        <!-- VIEW: CART -->
+        <section id="view-cart" class="page-view">
+            <div class="container">
+                <h1 class="section-title" style="margin-top: 2rem;">Your Cart</h1>
+                
+                <div id="cart-content" class="cart-container">
+                    <!-- Populated by JS -->
+                </div>
+                
+                <div id="empty-cart" class="empty-state hidden">
+                    <i class="fas fa-shopping-bag" style="font-size: 4rem; color: var(--border-color); margin-bottom: 1rem;"></i>
+                    <h2>Your cart is empty</h2>
+                    <p style="margin: 1rem 0 2rem; color: var(--text-light);">Looks like you haven't added anything to your cart yet.</p>
+                    <button class="btn btn-primary" onclick="navigateTo('shop')">Continue Shopping</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- VIEW: CHECKOUT -->
+        <section id="view-checkout" class="page-view">
+            <div class="container">
+                <h1 class="section-title" style="margin-top: 2rem;">Checkout</h1>
+                
+                <form id="checkout-form" class="checkout-container" onsubmit="handleCheckout(event)">
+                    <div class="checkout-left">
+                        <div class="form-section">
+                            <h3>Contact & Shipping Info</h3>
+                            <div class="form-grid">
+                                <div class="form-group full">
+                                    <label>Full Name</label>
+                                    <input type="text" required placeholder="Priya Sharma">
+                                </div>
+                                <div class="form-group">
+                                    <label>Email Address</label>
+                                    <input type="email" required placeholder="priya@example.com">
+                                </div>
+                                <div class="form-group">
+                                    <label>Phone Number</label>
+                                    <input type="tel" required placeholder="+91 9876543210" pattern="[0-9\+\s\-]+">
+                                </div>
+                                <div class="form-group full">
+                                    <label>Complete Address</label>
+                                    <input type="text" required placeholder="House No, Street, Landmark">
+                                </div>
+                                <div class="form-group">
+                                    <label>City</label>
+                                    <input type="text" required placeholder="Mumbai">
+                                </div>
+                                <div class="form-group">
+                                    <label>State</label>
+                                    <input type="text" required placeholder="Maharashtra">
+                                </div>
+                                <div class="form-group">
+                                    <label>Pincode</label>
+                                    <input type="text" required placeholder="400001" pattern="[0-9]{6}">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-section">
+                            <h3>Payment Method</h3>
+                            <div class="payment-methods">
+                                <label class="payment-label">
+                                    <input type="radio" name="payment" value="upi" checked>
+                                    <span>UPI (GPay, PhonePe, Paytm)</span>
+                                </label>
+                                <label class="payment-label">
+                                    <input type="radio" name="payment" value="card">
+                                    <span>Credit / Debit Card</span>
+                                </label>
+                                <label class="payment-label">
+                                    <input type="radio" name="payment" value="netbanking">
+                                    <span>Net Banking</span>
+                                </label>
+                                <label class="payment-label">
+                                    <input type="radio" name="payment" value="cod">
+                                    <span>Cash on Delivery (COD)</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="checkout-right">
+                        <div class="cart-summary" id="checkout-summary">
+                            <!-- Populated by JS -->
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </section>
+
+        <!-- VIEW: INFO PAGES (Dynamic) -->
+        <section id="view-info" class="page-view">
+            <div class="container">
+                <div class="info-container">
+                    <h1 class="section-title" id="info-title" style="margin-top: 0;">Page Title</h1>
+                    <div id="info-content" class="info-content">
+                        <!-- Populated by JS -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer id="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <h3>KHUSSH</h3>
+                    <p>Redefining Indian ethnic wear for the modern woman. Everyday elegance, unparalleled comfort, and sustainable craftsmanship.</p>
+                    <div class="social-icons">
+                        <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" title="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://pinterest.com" target="_blank" rel="noopener noreferrer" title="Pinterest"><i class="fab fa-pinterest-p"></i></a>
+                    </div>
+                </div>
+                <div class="footer-links">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a onclick="navigateTo('home')" style="cursor: pointer;">Home</a></li>
+                        <li><a onclick="navigateTo('shop')" style="cursor: pointer;">Shop All</a></li>
+                        <li><a onclick="filterAndNavigate('Everyday Kurtas')" style="cursor: pointer;">Everyday Kurtas</a></li>
+                        <li><a onclick="filterAndNavigate('Festive Edit')" style="cursor: pointer;">Festive Edit</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4>Customer Care</h4>
+                    <ul>
+                        <li><a onclick="navigateToInfo('contact')" style="cursor: pointer;">Contact Us</a></li>
+                        <li><a onclick="navigateToInfo('shipping')" style="cursor: pointer;">Shipping & Returns</a></li>
+                        <li><a onclick="navigateToInfo('size-guide')" style="cursor: pointer;">Size Guide</a></li>
+                        <li><a onclick="navigateToInfo('faqs')" style="cursor: pointer;">FAQs</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4>About KHUSSH</h4>
+                    <ul>
+                        <li><a onclick="navigateToInfo('our-story')" style="cursor: pointer;">Our Story</a></li>
+                        <li><a onclick="navigateToInfo('sustainability')" style="cursor: pointer;">Sustainability</a></li>
+                        <li><a onclick="navigateToInfo('journal')" style="cursor: pointer;">Journal</a></li>
+                        <li><a onclick="navigateToInfo('careers')" style="cursor: pointer;">Careers</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 KHUSSH. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- PRODUCT MODAL -->
+    <div class="modal-overlay" id="product-modal-overlay">
+        <div class="product-modal">
+            <button class="close-modal" onclick="closeModal()"><i class="fas fa-times"></i></button>
+            <div>
+                <img src="" alt="Product" id="modal-img" class="modal-image">
+            </div>
+            <div class="modal-details">
+                <h2 class="modal-title" id="modal-title">Product Name</h2>
+                <p class="modal-price" id="modal-price">₹0</p>
+                <p class="modal-desc" id="modal-desc">Detailed product description showcasing the premium fabric, comfortable fit, and elegant Indian craftsmanship suitable for your everyday wardrobe.</p>
+                
+                <p style="font-size: 0.9rem; color: var(--text-light); margin-bottom: 1.5rem;"><strong>Fabric:</strong> 100% Premium Cotton/Linen blend</p>
+                
+                <div class="size-selector">
+                    <label>Select Size:</label>
+                    <div class="size-options" id="modal-sizes">
+                        <div class="size-btn selected" onclick="selectSize(this, 'XS')">XS</div>
+                        <div class="size-btn" onclick="selectSize(this, 'S')">S</div>
+                        <div class="size-btn" onclick="selectSize(this, 'M')">M</div>
+                        <div class="size-btn" onclick="selectSize(this, 'L')">L</div>
+                        <div class="size-btn" onclick="selectSize(this, 'XL')">XL</div>
+                    </div>
+                </div>
+
+                <button class="btn btn-primary" id="modal-add-btn" style="width: 100%; padding: 15px; font-size: 1.1rem;">ADD TO CART</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- TOAST NOTIFICATION -->
+    <div id="toast" class="toast">Action successful</div>
+
+    <script>
+        // --- DATA ---
+        const products = [
+            { id: 1, name: "Everyday Linen Kurta", price: 2200, category: "Everyday Kurtas", image: "https://images.pexels.com/photos/3518623/pexels-photo-3518623.jpeg?auto=compress&cs=tinysrgb&w=600", isBestSeller: true, desc: "A breathable, lightweight linen kurta designed for ultimate comfort during long work days. Features delicate threadwork on the neckline." },
+            { id: 2, name: "Ivory Cotton Co-ord Set", price: 3400, category: "Comfort Co-ords", image: "https://images.pexels.com/photos/1055691/pexels-photo-1055691.jpeg?auto=compress&cs=tinysrgb&w=600", isBestSeller: true, desc: "Monochrome elegance. This two-piece set includes a relaxed tunic and straight pants, made from the softest organic cotton." },
+            { id: 3, name: "Maroon Festive Kurta", price: 4200, category: "Festive Edit", image: "https://images.pexels.com/photos/1488463/pexels-photo-1488463.jpeg?auto=compress&cs=tinysrgb&w=600", isBestSeller: true, desc: "Rich maroon silk-blend kurta adorned with subtle gold zari work. Perfect for intimate gatherings and festive dinners." },
+            { id: 4, name: "Handblock Printed Kurta", price: 2800, category: "Everyday Kurtas", image: "https://images.pexels.com/photos/2625232/pexels-photo-2625232.jpeg?auto=compress&cs=tinysrgb&w=600", isBestSeller: true, desc: "Traditional Rajasthani handblock prints on a modern silhouette. Comes with practical side pockets." },
+            { id: 5, name: "Mulmul Daily Kurta", price: 1950, category: "Everyday Kurtas", image: "https://images.pexels.com/photos/1385472/pexels-photo-1385472.jpeg?auto=compress&cs=tinysrgb&w=600", isBestSeller: true, desc: "Experience the cloud-like feel of pure Mulmul cotton. Designed in a flowy A-line cut for ease of movement." },
+            { id: 6, name: "Gold Accent Kurta", price: 4800, category: "Festive Edit", image: "https://images.pexels.com/photos/2058145/pexels-photo-2058145.jpeg?auto=compress&cs=tinysrgb&w=600", isBestSeller: true, desc: "A premium chanderi kurta featuring delicate gold foil accents and a flattering V-neckline." },
+            { id: 7, name: "Indigo Workwear Tunic", price: 2600, category: "Workwear Ethnic", image: "https://images.pexels.com/photos/3828942/pexels-photo-3828942.jpeg?auto=compress&cs=tinysrgb&w=600", isBestSeller: false, desc: "Sharp, structured, yet inherently Indian. This indigo tunic pairs perfectly with trousers for a power-dressing ethnic look." },
+            { id: 8, name: "Blush Pink Co-ord", price: 3600, category: "Comfort Co-ords", image: "https://images.pexels.com/photos/2036646/pexels-photo-2036646.jpeg?auto=compress&cs=tinysrgb&w=600", isBestSeller: false, desc: "Transition from day to night effortlessly with this stylish blush pink coordinated set." }
+        ];
+
+        const infoPagesData = {
+            'contact': {
+                title: 'Contact Us',
+                content: '<p>We would love to hear from you! Reach out to us for any queries regarding your orders, styling advice, or general feedback.</p><p><strong>Email:</strong> support@khussh.com</p><p><strong>Phone:</strong> +91 98765 43210 (Mon-Fri, 10 AM to 6 PM IST)</p><p><strong>Address:</strong> KHUSSH Studio, 12 Fashion Avenue, Mumbai, Maharashtra 400001</p>'
+            },
+            'shipping': {
+                title: 'Shipping & Returns',
+                content: '<h3>Shipping Policy</h3><p>We offer free express shipping on all orders above ₹2000 within India. Orders are typically dispatched within 48 hours and delivered within 3-5 business days.</p><h3>Return Policy</h3><p>If you are not entirely satisfied with your purchase, we offer a hassle-free 7-day return/exchange policy. The items must be unworn, unwashed, and have original tags attached.</p>'
+            },
+            'size-guide': {
+                title: 'Size Guide',
+                content: '<p>Our garments are designed for comfort. Use the chart below to find your perfect KHUSSH fit.</p><table class="size-chart"><tr><th>Size</th><th>Bust (in)</th><th>Waist (in)</th><th>Hip (in)</th></tr><tr><td>XS</td><td>32</td><td>26</td><td>36</td></tr><tr><td>S</td><td>34</td><td>28</td><td>38</td></tr><tr><td>M</td><td>36</td><td>30</td><td>40</td></tr><tr><td>L</td><td>38</td><td>32</td><td>42</td></tr><tr><td>XL</td><td>40</td><td>34</td><td>44</td></tr></table>'
+            },
+            'faqs': {
+                title: 'Frequently Asked Questions',
+                content: '<h3>Do you ship internationally?</h3><p>Currently, we only ship within India. We plan to expand globally soon!</p><h3>How do I care for my linen/cotton garments?</h3><p>We recommend gentle hand wash or a delicate machine wash in cold water. Dry in shade to maintain the vibrant colors.</p><h3>Can I change my order after placing it?</h3><p>You can cancel or modify your order within 24 hours of placing it by contacting our support team.</p>'
+            },
+            'our-story': {
+                title: 'Our Story',
+                content: '<p>KHUSSH was born from a simple idea: Indian wear shouldn\'t be confined to the back of the closet, waiting for a special occasion.</p><p>Founded in 2026, we aim to bridge the gap between traditional craftsmanship and modern utility. We source the finest breathable fabrics—linens, mulmul, and pure cottons—and tailor them into silhouettes that flatter the contemporary woman.</p><p>We believe in "Ethnic, Every Day."</p>'
+            },
+            'sustainability': {
+                title: 'Sustainability',
+                content: '<p>At KHUSSH, we are committed to mindful fashion.</p><ul><li><strong>Fabrics:</strong> We strictly use natural, biodegradable fibers.</li><li><strong>Artisans:</strong> We partner directly with local artisan clusters, ensuring fair wages and preserving traditional handblock and weaving techniques.</li><li><strong>Packaging:</strong> All our orders are shipped in 100% plastic-free, compostable packaging.</li></ul>'
+            },
+            'journal': {
+                title: 'The KHUSSH Journal',
+                content: '<p>Welcome to our editorial space. We are currently curating beautiful stories about styling, artisan spotlights, and modern Indian living.</p><p><em>Check back soon for our first volume!</em></p>'
+            },
+            'careers': {
+                title: 'Careers',
+                content: '<p>We are always on the lookout for passionate individuals to join the KHUSSH family.</p><p>Currently, we do not have any open positions, but we would love to keep your profile on file. Please send your resume and portfolio to <strong>careers@khussh.com</strong>.</p>'
+            }
+        };
+
+        // --- STATE ---
+        let cart = JSON.parse(localStorage.getItem('khussh_cart')) || [];
+        let currentModalSize = 'XS';
+
+        // --- INITIALIZATION ---
+        document.addEventListener('DOMContentLoaded', () => {
+            renderBestSellers();
+            renderShopProducts(products);
+            updateCartCount();
+            
+            // Start Hero Slider
+            initHeroSlider();
+            
+            // Header scroll effect
+            window.addEventListener('scroll', () => {
+                const header = document.getElementById('header');
+                if (window.scrollY > 50) {
+                    header.style.boxShadow = '0 2px 10px rgba(0,0,0,0.1)';
+                } else {
+                    header.style.boxShadow = 'none';
+                }
+            });
+        });
+
+        // --- HERO SLIDER LOGIC ---
+        function initHeroSlider() {
+            let currentSlide = 0;
+            const slides = document.querySelectorAll('.hero-slides .slide');
+            
+            if(slides.length > 0) {
+                setInterval(() => {
+                    slides[currentSlide].classList.remove('active');
+                    currentSlide = (currentSlide + 1) % slides.length;
+                    slides[currentSlide].classList.add('active');
+                }, 4000); // Change slide every 4 seconds
+            }
+        }
+
+        // --- ROUTING / VIEW LOGIC ---
+        function navigateTo(viewId) {
+            // Hide all views
+            document.querySelectorAll('.page-view').forEach(el => el.classList.remove('active'));
+            // Remove active class from nav links
+            document.querySelectorAll('.nav-link').forEach(el => el.classList.remove('active'));
+            
+            // Show requested view
+            const viewElement = document.getElementById(`view-${viewId}`);
+            if(viewElement) {
+                viewElement.classList.add('active');
+            }
+            
+            // Highlight top nav link
+            const navLink = document.querySelector(`.nav-link[data-target="${viewId}"]`);
+            if(navLink) navLink.classList.add('active');
+
+            // Highlight mobile bottom nav link
+            document.querySelectorAll('.bottom-nav-item').forEach(el => el.classList.remove('active'));
+            const bottomNavLink = document.querySelector(`.bottom-nav-item[data-target="${viewId}"]`);
+            if(bottomNavLink) bottomNavLink.classList.add('active');
+
+            // View specific logic
+            if(viewId === 'cart') renderCart();
+            if(viewId === 'checkout') renderCheckoutSummary();
+            if(viewId === 'shop') {
+                document.getElementById('category-filter').value = 'all';
+                applyFilters();
+            }
+
+            // Close mobile menu and scroll to top
+            document.getElementById('nav-links').classList.remove('active');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function filterAndNavigate(category) {
+            navigateTo('shop');
+            const select = document.getElementById('category-filter');
+            select.value = category;
+            applyFilters();
+        }
+
+        function scrollToFooter() {
+            document.getElementById('nav-links').classList.remove('active');
+            document.getElementById('footer').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function toggleMobileMenu() {
+            document.getElementById('nav-links').classList.toggle('active');
+        }
+
+        function navigateToInfo(pageKey) {
+            const pageData = infoPagesData[pageKey];
+            if(pageData) {
+                document.getElementById('info-title').innerText = pageData.title;
+                document.getElementById('info-content').innerHTML = pageData.content;
+                navigateTo('info');
+            }
+        }
+
+        // --- RENDERING PRODUCTS ---
+        function createProductCard(product) {
+            return `
+                <div class="product-card">
+                    <div class="product-image-wrapper" onclick="openModal(${product.id})">
+                        <img src="${product.image}" alt="${product.name}" loading="lazy">
+                        <div class="quick-add">
+                            <button class="btn btn-secondary" style="width: 100%; padding: 10px;" onclick="event.stopPropagation(); openModal(${product.id})">Quick View</button>
+                        </div>
+                    </div>
+                    <h3 class="product-title" onclick="openModal(${product.id})">${product.name}</h3>
+                    <p class="product-price">₹${product.price}</p>
+                </div>
+            `;
+        }
+
+        function renderBestSellers() {
+            const grid = document.getElementById('bestsellers-grid');
+            const bestSellers = products.filter(p => p.isBestSeller);
+            grid.innerHTML = bestSellers.map(p => createProductCard(p)).join('');
+        }
+
+        function renderShopProducts(productsToRender) {
+            const grid = document.getElementById('shop-grid');
+            const countText = document.getElementById('product-count-text');
+            
+            if(productsToRender.length === 0) {
+                grid.innerHTML = '<div class="empty-state"><h3>No products found in this category.</h3></div>';
+            } else {
+                grid.innerHTML = productsToRender.map(p => createProductCard(p)).join('');
+            }
+            
+            countText.innerText = `Showing ${productsToRender.length} products`;
+        }
+
+        function applyFilters() {
+            const category = document.getElementById('category-filter').value;
+            const sort = document.getElementById('sort-filter').value;
+            
+            let filtered = [...products];
+            
+            // Filter
+            if (category !== 'all') {
+                filtered = filtered.filter(p => p.category === category);
+            }
+            
+            // Sort
+            if (sort === 'price-low') {
+                filtered.sort((a, b) => a.price - b.price);
+            } else if (sort === 'price-high') {
+                filtered.sort((a, b) => b.price - a.price);
+            }
+            
+            renderShopProducts(filtered);
+        }
+
+        // --- MODAL LOGIC ---
+        function openModal(productId) {
+            const product = products.find(p => p.id === productId);
+            if(!product) return;
+
+            document.getElementById('modal-img').src = product.image;
+            document.getElementById('modal-title').innerText = product.name;
+            document.getElementById('modal-price').innerText = `₹${product.price}`;
+            document.getElementById('modal-desc').innerText = product.desc;
+            
+            // Reset size selection
+            const sizeBtns = document.querySelectorAll('.size-btn');
+            sizeBtns.forEach(btn => btn.classList.remove('selected'));
+            sizeBtns[0].classList.add('selected');
+            currentModalSize = 'XS';
+
+            // Setup Add button
+            const addBtn = document.getElementById('modal-add-btn');
+            addBtn.onclick = () => {
+                addToCart(product.id, currentModalSize);
+                closeModal();
+            };
+
+            const overlay = document.getElementById('product-modal-overlay');
+            overlay.style.display = 'flex';
+            setTimeout(() => overlay.classList.add('active'), 10);
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            const overlay = document.getElementById('product-modal-overlay');
+            overlay.classList.remove('active');
+            setTimeout(() => {
+                overlay.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            }, 300);
+        }
+
+        function selectSize(element, size) {
+            document.querySelectorAll('.size-btn').forEach(btn => btn.classList.remove('selected'));
+            element.classList.add('selected');
+            currentModalSize = size;
+        }
+
+        // Close modal on outside click
+        document.getElementById('product-modal-overlay').addEventListener('click', function(e) {
+            if(e.target === this) closeModal();
+        });
+
+        // --- CART LOGIC ---
+        function addToCart(productId, size) {
+            const product = products.find(p => p.id === productId);
+            if(!product) return;
+
+            const existingItemIndex = cart.findIndex(item => item.id === productId && item.size === size);
+            
+            if(existingItemIndex > -1) {
+                cart[existingItemIndex].qty += 1;
+            } else {
+                cart.push({
+                    id: product.id,
+                    name: product.name,
+                    price: product.price,
+                    image: product.image,
+                    size: size,
+                    qty: 1
+                });
+            }
+
+            saveCart();
+            showToast(`${product.name} added to cart`);
+        }
+
+        function saveCart() {
+            localStorage.setItem('khussh_cart', JSON.stringify(cart));
+            updateCartCount();
+            if(document.getElementById('view-cart').classList.contains('active')) {
+                renderCart();
+            }
+        }
+
+        function updateCartCount() {
+            const count = cart.reduce((sum, item) => sum + item.qty, 0);
+            document.getElementById('cart-count').innerText = count;
+            
+            // Update mobile bottom nav cart counter
+            const mobileCount = document.getElementById('mobile-cart-count');
+            if(mobileCount) mobileCount.innerText = count;
+        }
+
+        function updateQty(index, delta) {
+            if(cart[index].qty + delta > 0) {
+                cart[index].qty += delta;
+                saveCart();
+            }
+        }
+
+        function removeFromCart(index) {
+            cart.splice(index, 1);
+            saveCart();
+            showToast('Item removed from cart');
+        }
+
+        function renderCart() {
+            const container = document.getElementById('cart-content');
+            const emptyState = document.getElementById('empty-cart');
+            
+            if(cart.length === 0) {
+                container.style.display = 'none';
+                emptyState.style.display = 'block';
+                return;
+            }
+            
+            container.style.display = 'grid';
+            emptyState.style.display = 'none';
+
+            let itemsHtml = '<div class="cart-items">';
+            let subtotal = 0;
+
+            cart.forEach((item, index) => {
+                subtotal += item.price * item.qty;
+                itemsHtml += `
+                    <div class="cart-item">
+                        <img src="${item.image}" alt="${item.name}" class="cart-item-img">
+                        <div class="cart-item-details">
+                            <h4 class="cart-item-title">${item.name}</h4>
+                            <p class="cart-item-size">Size: ${item.size}</p>
+                            <div class="qty-controls">
+                                <button class="qty-btn" onclick="updateQty(${index}, -1)">-</button>
+                                <input type="text" class="qty-input" value="${item.qty}" readonly>
+                                <button class="qty-btn" onclick="updateQty(${index}, 1)">+</button>
+                            </div>
+                        </div>
+                        <div style="text-align: right;">
+                            <p class="cart-item-price">₹${item.price * item.qty}</p>
+                            <button class="remove-btn" onclick="removeFromCart(${index})">Remove</button>
+                        </div>
+                    </div>
+                `;
+            });
+            itemsHtml += '</div>';
+
+            const summaryHtml = `
+                <div class="cart-summary">
+                    <h3 style="margin-bottom: 1.5rem; font-family: var(--font-heading);">Order Summary</h3>
+                    <div class="summary-row">
+                        <span>Subtotal</span>
+                        <span>₹${subtotal}</span>
+                    </div>
+                    <div class="summary-row">
+                        <span>Shipping</span>
+                        <span>Free</span>
+                    </div>
+                    <div class="summary-row summary-total">
+                        <span>Total</span>
+                        <span>₹${subtotal}</span>
+                    </div>
+                    <button class="btn btn-primary checkout-btn" onclick="navigateTo('checkout')">PROCEED TO CHECKOUT</button>
+                </div>
+            `;
+
+            container.innerHTML = itemsHtml + summaryHtml;
+        }
+
+        // --- CHECKOUT LOGIC ---
+        function renderCheckoutSummary() {
+            if(cart.length === 0) {
+                navigateTo('cart');
+                return;
+            }
+
+            let subtotal = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
+            
+            let html = `
+                <h3 style="margin-bottom: 1.5rem; font-size: 1.4rem; border-bottom: 1px solid var(--border-color); padding-bottom: 0.5rem;">Order Summary</h3>
+                <div style="margin-bottom: 1.5rem; max-height: 300px; overflow-y: auto;">
+            `;
+
+            cart.forEach(item => {
+                html += `
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 1rem; font-size: 0.9rem;">
+                        <span style="color: var(--text-light);">${item.name} (${item.size}) x ${item.qty}</span>
+                        <span style="font-weight: 500;">₹${item.price * item.qty}</span>
+                    </div>
+                `;
+            });
+
+            html += `
+                </div>
+                <div class="summary-row">
+                    <span>Subtotal</span>
+                    <span>₹${subtotal}</span>
+                </div>
+                <div class="summary-row">
+                    <span>Shipping</span>
+                    <span>Free</span>
+                </div>
+                <div class="summary-row summary-total">
+                    <span>Total to Pay</span>
+                    <span>₹${subtotal}</span>
+                </div>
+                <button type="submit" class="btn btn-primary checkout-btn" style="font-size: 1.1rem; padding: 15px;">PLACE ORDER</button>
+            `;
+
+            document.getElementById('checkout-summary').innerHTML = html;
+        }
+
+        function handleCheckout(event) {
+            event.preventDefault();
+            
+            // Simulate processing
+            const btn = document.querySelector('#view-checkout button[type="submit"]');
+            const originalText = btn.innerText;
+            btn.innerText = 'PROCESSING...';
+            btn.style.opacity = '0.7';
+            btn.disabled = true;
+
+            setTimeout(() => {
+                // Success
+                cart = [];
+                saveCart();
+                document.getElementById('checkout-form').reset();
+                
+                btn.innerText = originalText;
+                btn.style.opacity = '1';
+                btn.disabled = false;
+                
+                showCustomMessage('Thank you for shopping with KHUSSH. Your order has been placed successfully!', true);
+            }, 1500);
+        }
+
+        // --- TOAST / MESSAGE LOGIC ---
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            toast.innerText = message;
+            toast.classList.add('show');
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3000);
+        }
+
+        function showCustomMessage(message, redirectHome = false) {
+            // Using a simple styled div instead of alert() per requirements
+            const msgBox = document.createElement('div');
+            msgBox.style.position = 'fixed';
+            msgBox.style.top = '0';
+            msgBox.style.left = '0';
+            msgBox.style.width = '100%';
+            msgBox.style.height = '100%';
+            msgBox.style.backgroundColor = 'rgba(0,0,0,0.8)';
+            msgBox.style.zIndex = '9999';
+            msgBox.style.display = 'flex';
+            msgBox.style.justifyContent = 'center';
+            msgBox.style.alignItems = 'center';
+
+            const content = document.createElement('div');
+            content.style.backgroundColor = '#fff';
+            content.style.padding = '3rem';
+            content.style.maxWidth = '500px';
+            content.style.textAlign = 'center';
+            content.style.borderRadius = '4px';
+
+            content.innerHTML = `
+                <i class="fas fa-check-circle" style="font-size: 4rem; color: #2e7d32; margin-bottom: 1rem;"></i>
+                <h2 style="font-family: var(--font-heading); margin-bottom: 1rem;">Order Confirmed!</h2>
+                <p style="color: var(--text-light); margin-bottom: 2rem;">${message}</p>
+                <button class="btn btn-primary">CONTINUE SHOPPING</button>
+            `;
+
+            content.querySelector('button').onclick = () => {
+                document.body.removeChild(msgBox);
+                if(redirectHome) navigateTo('home');
+            };
+
+            msgBox.appendChild(content);
+            document.body.appendChild(msgBox);
+        }
+    </script>
+</body>
+</html>
